@@ -151,4 +151,4 @@ TimelineView(
 
 ### License
 
-For licensing information, see [LICENSE](./LICENSE) for details.
+For licensing information, see [LICENSE](https://github.com/filozopdasha/TimelineFramework/blob/main/LICENSE.txt) for details.
