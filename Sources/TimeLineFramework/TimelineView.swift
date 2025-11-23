@@ -4,20 +4,26 @@
 //
 //  Created by Dasha Filozop on 10.11.2025.
 //
+///  Main timeline container responsible for layout, interaction and animations.
+///
 
 import SwiftUI
 
 public struct TimelineView: View {
+    /// Stores liked event ids
     @State private var likedEvents: Set<UUID> = []
+    /// Animation states for circles
     @State private var circleScales: [UUID: CGFloat] = [:]
     @State private var circleOpacities: [UUID: Double] = [:]
     @State private var circleOffsets: [UUID: CGFloat] = [:]
+    /// Timeline configuration
     public var events: [TimelineEvent]
     public var style: TimelineStyle
     public var typeOfAnimation: TimelineTypeOfAnimation?
     public var visibleCount: Int?
     public var addedLikes: Bool = false
     public var addedShare: Bool = false
+    /// Currently selected event for popup
     @State private var currEvent: TimelineEvent?
     @State private var shareButtonUsed: Bool = false
 
@@ -39,6 +45,7 @@ public struct TimelineView: View {
 
     public var body: some View {
         VStack(spacing: 30) {
+            /// Horizontal scroll container with event circles
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: calculatingSpace()) {
                     ForEach(events) { event in
@@ -78,6 +85,7 @@ public struct TimelineView: View {
         }
     }
 
+    /// Dynamically calculates spacing between circles
     private func calculatingSpace() -> CGFloat {
         guard let visibleCount = visibleCount, !events.isEmpty else {
             return style.spacing
@@ -109,6 +117,7 @@ public struct TimelineView: View {
     }
 }
 
+/// Supported animation types for circles
 public enum TimelineTypeOfAnimation {
     case bounce
     case jump
@@ -127,6 +136,7 @@ struct ShareSheet: UIViewControllerRepresentable {
 
 struct EventCircleView: View {
     let event: TimelineEvent
+    /// Bindings for state stored in parent
     @Binding var likedEvents: Set<UUID>
     @Binding var circleScales: [UUID: CGFloat]
     @Binding var circleOpacities: [UUID: Double]
@@ -139,6 +149,7 @@ struct EventCircleView: View {
     var body: some View {
         VStack(spacing: 0) {
             Button {
+                /// Trigger animation + open popup
                 animationsCreator(event: event)
             } label: {
                 ZStack(alignment: .topTrailing) {
@@ -147,6 +158,7 @@ struct EventCircleView: View {
                         .opacity(circleOpacities[event.id] ?? 1.0)
                         .offset(y: circleOffsets[event.id] ?? 0)
 
+                    /// Heart overlay if event is liked
                     if likedEvents.contains(event.id) {
                         Image(systemName: "heart.fill")
                             .foregroundColor(.red)
@@ -156,17 +168,20 @@ struct EventCircleView: View {
                 }
             }
             .offset(y: style.eventVerticalOffset)
+            /// Event date below circle
             event.dateView
                 .padding(.top, style.dateVerticalOffset)
         }
     }
 
     private func animationsCreator(event: TimelineEvent) {
+        /// If no animation type, just open popup
         guard let type = typeOfAnimation else {
             currEvent = event
             return
         }
 
+        /// Bounce animation
         if type == .bounce {
             withAnimation(.spring(response: style.animationSpeed, dampingFraction: style.animationBouncing)) {
                 circleScales[event.id] = 1.3
@@ -178,6 +193,7 @@ struct EventCircleView: View {
                 }
             }
 
+        /// Jump animation
         } else if type == .jump {
             withAnimation(.spring(response: style.animationSpeed, dampingFraction: style.animationBouncing)) {
                 circleOffsets[event.id] = -15
@@ -189,6 +205,7 @@ struct EventCircleView: View {
                 }
             }
 
+        /// Fade animation
         } else if type == .fade {
             withAnimation(.easeIn(duration: 0.2)) {
                 circleOpacities[event.id] = 0.3

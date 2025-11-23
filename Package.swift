@@ -13,7 +13,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "TimeLineFramework",
-            targets: ["TimeLineFramework"]),
+            targets: ["TimeLineFramework"])
     ],
     dependencies: [
         .package(url: "https://github.com/realm/SwiftLint", from: "0.54.0")
@@ -30,6 +30,6 @@ let package = Package(
         .testTarget(
             name: "TimeLineFrameworkTests",
             dependencies: ["TimeLineFramework"]
-        ),
+        )
     ]
 )

@@ -4,20 +4,32 @@
 //
 //  Created by Dasha Filozop on 10.11.2025.
 //
+///  This view represents a popup that displays detailed information
+///  about a selected timeline event. It supports optional interaction
+///  actions such as liking and sharing, and is fully configurable
+///  through TimelineStyle.
+///
 
 import SwiftUI
 
 struct TimelinePopupView: View {
+    /// Event displayed inside the popup
     let event: TimelineEvent
+    /// Style configurations
     let style: TimelineStyle
+    /// Ids of liked events
     @Binding var likedEvents: Set<UUID>
+    /// Enables Like button
     let addedLikes: Bool
+    /// Enables share button
     let addedShare: Bool
+    /// Controls share sheet presentation
     @Binding var shareButtonUsed: Bool
     @Environment(\.dismiss) private var closeButton
 
     var body: some View {
         VStack(spacing: 20) {
+            /// Close popup button
             HStack {
                 Spacer()
                 Button {
@@ -35,6 +47,7 @@ struct TimelinePopupView: View {
 
             }
 
+            /// Event title and description
             VStack(spacing: 10) {
                 event.titleView
 
@@ -49,6 +62,7 @@ struct TimelinePopupView: View {
             .accessibilityElement(children: .combine)
             .padding(.horizontal)
 
+            /// Like button
             if addedLikes {
                 Button {
                     if likedEvents.contains(event.id) {
@@ -71,6 +85,7 @@ struct TimelinePopupView: View {
                 }
             }
 
+            /// Share button 
             if addedShare {
                 Button {
                     shareButtonUsed = true
