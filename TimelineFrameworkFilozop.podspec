@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TimelineFrameworkFilozop"
   spec.version      = "0.0.1"
-  spec.summary      = "A short description of TimelineFrameworkFilozop."
+  spec.summary      = "A SwiftUI framework for creating interactive and customizable horizontal timelines with events, animations, and popups."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,6 +25,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
+  TimelineFramework is a SwiftUI framework that allows developers to create interactive horizontal timelines with customizable events
                    DESC
 
   spec.homepage     = "https://github.com/filozopdasha/TimelineFramework"
@@ -64,7 +65,7 @@ Pod::Spec.new do |spec|
   #
 
   # spec.platform     = :ios
-  # spec.platform     = :ios, "5.0"
+  spec.platform     = :ios, "15.0"
 
   #  When using multiple platforms
   # spec.ios.deployment_target = "5.0"
@@ -80,7 +81,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/filozopdasha/TimelineFramework", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/filozopdasha/TimelineFramework.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,8 +92,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
+  spec.source_files  = "Sources", "Sources/**/*.{swift}"
+  #spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
 
