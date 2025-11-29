@@ -44,22 +44,20 @@ struct TimelinePopupView: View {
                 }
                 .padding(.trailing)
                 .accessibilityLabel("Close popup")
-
             }
 
             /// Event title and description
             VStack(spacing: 10) {
                 event.titleView
+                    .accessibilityAddTraits(.isHeader)
 
                 ScrollView {
                     event.descriptionView
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 4)
-
                 }
                 .frame(maxHeight: 220)
             }
-            .accessibilityElement(children: .combine)
             .padding(.horizontal)
 
             /// Like button
@@ -80,12 +78,12 @@ struct TimelinePopupView: View {
                     .background(likedEvents.contains(event.id) ? event.color.opacity(0.2) : Color.gray.opacity(0.2))
                     .foregroundColor(likedEvents.contains(event.id) ? .red : .primary)
                     .cornerRadius(12)
-                    .accessibilityLabel(likedEvents.contains(event.id) ? "Liked" : "Tap here to like this event")
-
                 }
+                .accessibilityLabel(likedEvents.contains(event.id) ? "Liked" : "Like this event")
+                .accessibilityHint(likedEvents.contains(event.id) ? "Double tap to unlike" : "Double tap to like")
             }
 
-            /// Share button 
+            /// Share button
             if addedShare {
                 Button {
                     shareButtonUsed = true
@@ -99,12 +97,11 @@ struct TimelinePopupView: View {
                     .background(Color.blue.opacity(0.1))
                     .foregroundColor(.blue)
                     .cornerRadius(12)
-                    .accessibilityLabel("Tap here to Share the event")
-
                 }
+                .accessibilityLabel("Share this event")
+                .accessibilityHint("Double tap to share")
                 .sheet(isPresented: $shareButtonUsed) {
 #if canImport(UIKit)
-
                     ShareSheet(items: [event.copiedText])
 #endif
                 }

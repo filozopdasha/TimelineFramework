@@ -167,10 +167,9 @@ struct EventCircleView: View {
                     }
                 }
             }
-            .offset(y: style.eventVerticalOffset)
             /// Event date below circle
             event.dateView
-                .padding(.top, style.dateVerticalOffset)
+                .padding(.top, style.labelPosition)
         }
     }
 

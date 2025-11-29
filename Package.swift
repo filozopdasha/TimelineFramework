@@ -15,17 +15,17 @@ let package = Package(
             name: "TimeLineFramework",
             targets: ["TimeLineFramework"])
     ],
-    dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint", from: "0.54.0")
-    ],
+  //  dependencies: [
+  //      .package(url: "https://github.com/realm/SwiftLint", from: "0.54.0")
+  //  ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
             .target(
-                name: "TimeLineFramework",
-                plugins: [
-                    .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")
-                ]
+                name: "TimeLineFramework"//,
+              //  plugins: [
+                 //   .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")
+             //   ]
             ),
         .testTarget(
             name: "TimeLineFrameworkTests",

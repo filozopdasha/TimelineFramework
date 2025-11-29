@@ -20,9 +20,7 @@ public struct TimelineStyle {
     /// Spacing between timeline events
     public var spacing: CGFloat
     /// Vertical offset for date label
-    public var dateVerticalOffset: CGFloat
-    /// Vertical offset for event content
-    public var eventVerticalOffset: CGFloat
+    public var labelPosition: CGFloat
     /// Animation speed (spring response)
     public var animationSpeed: CGFloat
     /// Animation bounciness (spring damping)
@@ -44,8 +42,7 @@ public struct TimelineStyle {
         importantSize: CGFloat = 35,
         regularSize: CGFloat = 20,
         spacing: CGFloat = 50,
-        dateVerticalOffset: CGFloat = 25,
-        eventVerticalOffset: CGFloat = -5,
+        labelPosition: CGFloat = 25,
         animationSpeed: CGFloat = 0.35,
         animationBouncing: CGFloat = 0.75,
         popupCornerRadius: CGFloat = 25,
@@ -58,8 +55,7 @@ public struct TimelineStyle {
         self.importantCircleSize = importantSize
         self.normalCircleSize = regularSize
         self.spacing = spacing
-        self.dateVerticalOffset = dateVerticalOffset
-        self.eventVerticalOffset = eventVerticalOffset
+        self.labelPosition = labelPosition
         self.animationSpeed = animationSpeed
         self.animationBouncing = animationBouncing
         self.popupCornerRadius = popupCornerRadius
