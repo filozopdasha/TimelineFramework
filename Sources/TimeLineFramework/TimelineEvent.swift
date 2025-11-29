@@ -127,19 +127,20 @@ private struct TextFinder<Content: View>: View {
     private func extractPossibleTextField(from view: Any) -> String? {
         ///Mirror lets look what's inside of the view
         let mirror = Mirror(reflecting: view)
-        
-        /// Checking if it's a Text view
+
+        /// Check if it's a Text view
         if String(describing: type(of: view)).contains("Text") {
             /// Searching for string content
             for property in mirror.children {
-                guard let valueOfProperty = property.value as? Any else { continue }
-                let innerMirror = Mirror(reflecting: valueOfProperty)
+                let innerMirror = Mirror(reflecting: property.value)
                 for innerProperty in innerMirror.children {
-                    guard let foundTextValue = innerProperty.value as? String else { continue }
-                    return foundTextValue
+                    if let foundTextValue = innerProperty.value as? String {
+                        return foundTextValue
+                    }
                 }
             }
         }
+
         return nil
     }
 }
